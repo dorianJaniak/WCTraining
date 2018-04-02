@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>StaticScene.qml</file>
+        <file>Sensor.qml</file>
+        <file>Actor.qml</file>
+        <file>ActorMovementScenarios.qml</file>
+        <file>Scene.qml</file>
+        <file>ControlPanel.qml</file>
+    </qresource>
+</RCC>
