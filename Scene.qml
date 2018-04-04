@@ -26,6 +26,43 @@ Rectangle {
         anchors.fill: parent
     }
 
+    Rectangle {
+        id: doors
+
+        property real angle: 0
+
+        Behavior on angle {
+            animation: NumberAnimation {
+                duration: 1000
+            }
+        }
+
+        state: "opened"
+        x: 120 + constants.wallThickness
+        y: parent.height / 3
+        width: 100
+        height: constants.wallThickness
+        color: "blue"
+
+        transform: Rotation {
+            id: doorsRotation
+            angle: doors.angle
+        }
+
+        states: [
+            State { name: "opened"; PropertyChanges { target: doors; angle: 0 } },
+            State { name: "closed"; PropertyChanges { target: doors; angle: -90 } }
+        ]
+
+        MouseArea {
+            onClicked: {
+                console.log("CLICK: ", parent.state)
+                parent.state = "closed";
+            }
+            anchors.fill: parent
+        }
+    }
+
     ActorMovementScenarios {
         id: actorMovementScenarios
         target: actor
@@ -45,7 +82,7 @@ Rectangle {
         name: "throne"
         x: constants.wallThickness
         y: scene.height / 6
-        actors: [actor].concat(staticScene.verticalWalls)
+        actors: [actor].concat(staticScene.verticalWalls).concat(doors)
         direction: "right"
         turnOnIt: Backend.throneDrain
         onTurnOnItChanged: console.log("throneDrain:", Backend.throneDrain)
@@ -55,7 +92,7 @@ Rectangle {
         name: "light"
         x: 2 * scene.width / 3
         y: constants.wallThickness
-        actors: [actor].concat(staticScene.horizontalWalls)
+        actors: [actor].concat(staticScene.horizontalWalls).concat(doors)
         direction: "down"
         turnOnIt: Backend.lightOn
         onTurnOnItChanged: console.log("lightOn:", Backend.lightOn)

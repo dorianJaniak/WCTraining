@@ -12,7 +12,6 @@ Item {
     property var actors: []
 
 
-
     function detectActor() {
         var centerX = x + 0.5 * width;
         var centerY = y + 0.5 * height;
@@ -21,23 +20,51 @@ Item {
 
         actors.forEach(
             function measure(value, index) {
-                switch (direction) {
-                case "left":
-                    var distance = Math.max(0, x - (value.x + value.width));
-                    var inRange = (centerY < value.y + value.height && centerY > value.y && distance > 0);
-                    break;
-                case "right":
-                    var distance = Math.max(0, value.x - x);
-                    var inRange = (centerY < value.y + value.height && centerY > value.y && distance > 0);
-                    break;
-                case "up":
-                    var distance = Math.max(0, y - (value.y + value.height));
-                    var inRange = (centerX < value.x + value.width && centerX > value.x && distance > 0);
-                    break;
-                case "down":
-                    var distance = Math.max(0, value.y - y);
-                    var inRange = (centerX < value.x + value.width && centerX > value.x && distance > 0);
-                    break;
+                if(value.angle === undefined) {
+                    switch (direction) {
+                    case "left":
+                        var distance = Math.max(0, x - (value.x + value.width));
+                        var inRange = (centerY < value.y + value.height && centerY > value.y && distance > 0);
+                        break;
+                    case "right":
+                        var distance = Math.max(0, value.x - x);
+                        var inRange = (centerY < value.y + value.height && centerY > value.y && distance > 0);
+                        break;
+                    case "up":
+                        var distance = Math.max(0, y - (value.y + value.height));
+                        var inRange = (centerX < value.x + value.width && centerX > value.x && distance > 0);
+                        break;
+                    case "down":
+                        var distance = Math.max(0, value.y - y);
+                        var inRange = (centerX < value.x + value.width && centerX > value.x && distance > 0);
+                        break;
+                    }
+                }
+                else {
+                    switch (direction) {
+                    case "right":
+                        var r = (y - value.y) / Math.sin(Math.PI * value.angle / 180);
+                        var inRange = (r > 0 && r < value.width);
+                        if (inRange)
+                        {
+                            var distance = r * Math.cos(Math.PI * value.angle / 180) + value.x - x;
+                        }
+                        break;
+                    case "left":
+                        var r = (y - value.y) / Math.sin(Math.PI * value.angle / 180);
+                        var inRange = (r > 0 && r < value.width);
+                        if (inRange)
+                            var distance = x - (r * Math.cos(Math.PI * value.angle / 180) + value.x);
+                        break;
+                    case "down":
+                        var r = (x - value.x) / Math.cos(Math.PI * value.angle / 180);
+                        var inRange = (r > 0 && r < value.width);
+                        if (inRange)
+                            var distance = r * Math.sin(Math.PI * value.angle / 180) + value.y - y;
+                        break;
+                    case "up":
+                        break;
+                    }
                 }
 
                 measuredDistance = Math.min(measuredDistance, inRange ? distance : measuredDistance);
