@@ -19,6 +19,8 @@ Rectangle {
         readonly property int floorTileSize: 20
         readonly property real floorTileAngle: 45
         readonly property int actorSize: 40
+        readonly property int doorsLength: 80
+        readonly property int cabineSize: 80
     }
 
     StaticScene {
@@ -38,9 +40,9 @@ Rectangle {
         }
 
         state: "opened"
-        x: 120 + constants.wallThickness
-        y: parent.height / 3
-        width: 100
+        x: constants.cabineSize + constants.wallThickness
+        y: constants.cabineSize + constants.wallThickness
+        width: constants.doorsLength
         height: constants.wallThickness
         color: "blue"
 
@@ -53,14 +55,6 @@ Rectangle {
             State { name: "opened"; PropertyChanges { target: doors; angle: 0 } },
             State { name: "closed"; PropertyChanges { target: doors; angle: -90 } }
         ]
-
-        MouseArea {
-            onClicked: {
-                console.log("CLICK: ", parent.state)
-                parent.state = "closed";
-            }
-            anchors.fill: parent
-        }
     }
 
     ActorMovementScenarios {
@@ -79,13 +73,13 @@ Rectangle {
     }
 
     Sensor {
-        name: "throne"
+        name: "toilet"
         x: constants.wallThickness
         y: scene.height / 6
         actors: [actor].concat(staticScene.verticalWalls).concat(doors)
         direction: "right"
-        turnOnIt: Backend.throneDrain
-        onTurnOnItChanged: console.log("throneDrain:", Backend.throneDrain)
+        turnOnIt: Backend.toiletDrain
+        onTurnOnItChanged: console.log("toiletDrain:", Backend.toiletDrain)
     }
 
     Sensor {

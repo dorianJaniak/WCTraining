@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 
     Backend backend;
     backend.assignSensor("GP2D12", "pissoir");
-    backend.assignSensor("GP2Y0A02YK0F", "throne");
+    backend.assignSensor("GP2Y0A02YK0F", "toilet");
     backend.assignSensor("GP2Y0A710K0F", "light");
     view.rootContext()->setContextProperty("Backend", &backend);
 

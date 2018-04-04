@@ -48,8 +48,8 @@ Item {
     Rectangle {
         id: wallInternal
         x: constants.wallThickness
-        y: parent.height / 3
-        width: 120
+        y: constants.cabineSize + constants.wallThickness
+        width: constants.cabineSize
         height: constants.wallThickness
         color: constants.wallColor
     }

@@ -3,15 +3,15 @@ import QtQuick 2.1
 Rectangle {
     id: window
     visible: true
-    width: 300
-    height: 350
+    width: 250
+    height: 280
 
     Scene {
         id: scene
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-        height: 300
+        height: 250
         onAnimationEnd: controlPanel.animationEnd()
     }
 

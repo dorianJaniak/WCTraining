@@ -4,14 +4,14 @@ Rectangle {
     id: controlPanel
     color: startedAnimation ? "gray" : "lightgreen"
 
-    property int btnsCount: 12
+    property int btnsCount: 6
     readonly property int btnWidth: width / btnsCount
     property bool startedAnimation: false
 
     signal startTest(int number)
     signal animationEnd();
 
-    onAnimationEnd: startedAnimation = false;
+   // onAnimationEnd: startedAnimation = false;
 
     Row {
         anchors.fill: parent
@@ -36,7 +36,7 @@ Rectangle {
                     anchors.fill: parent
                     onClicked: {
                         startTest(index)
-                        controlPanel.startedAnimation = true;
+                 //       controlPanel.startedAnimation = true;
                     }
                 }
             }

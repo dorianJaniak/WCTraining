@@ -7,9 +7,9 @@ bool handlePissoirMeasurement(double voltage, std::string sensor)
     return (voltage > 1.0);
 }
 
-bool handleThroneMeasurement(double voltage, std::string sensor)
+bool handleToiletMeasurement(double voltage, std::string sensor)
 {
-  //  std::cout << "Throne Voltage: " << voltage << std::endl;
+  //  std::cout << "Toilet Voltage: " << voltage << std::endl;
     return (voltage > 1.0); //0.8
 }
 

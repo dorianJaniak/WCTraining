@@ -6,7 +6,7 @@
 
 Backend::Backend(QObject *parent) :
     m_pissoirDrain(false),
-    m_throneDrain(false),
+    m_toiletDrain(false),
     m_lightOn(false)
 {
     Q_UNUSED(parent)
@@ -33,10 +33,10 @@ void Backend::measurement(QString device, int distance)
         m_pissoirDrain = handlePissoirMeasurement(voltage, m_converters[device].toStdString());
         emit pissoirDrainChanged();
     }
-    else if(device == "throne")
+    else if(device == "toilet")
     {
-        m_throneDrain = handleThroneMeasurement(voltage, m_converters[device].toStdString());
-        emit throneDrainChanged();
+        m_toiletDrain = handleToiletMeasurement(voltage, m_converters[device].toStdString());
+        emit toiletDrainChanged();
     }
     else if(device == "light")
     {
@@ -52,7 +52,7 @@ void Backend::measurement(QString device, int distance)
 bool Backend::assignSensor(QString sensor, QString device)
 {
     if((sensor == "GP2D12" || sensor == "GP2Y0A02YK0F" || sensor == "GP2Y0A710K0F") &&
-       (device == "pissoir" || device == "throne" || device == "light"))
+       (device == "pissoir" || device == "toilet" || device == "light"))
         m_converters[device] = sensor;
     else
         return false;
@@ -65,9 +65,9 @@ int Backend::pissoirDrain()
     return m_pissoirDrain;
 }
 
-int Backend::throneDrain() const
+int Backend::toiletDrain() const
 {
-    return m_throneDrain;
+    return m_toiletDrain;
 }
 
 int Backend::lightOn() const
