@@ -8,6 +8,8 @@ Item {
         switch(num) {
         case 0: test01.start(); break;
         case 1: test02.start(); break;
+        case 2: test03.start(); break;
+        case 3: test04.start(); break;
         }
     }
 
@@ -41,6 +43,7 @@ Item {
             script: {
                 target.x = points.outside.x;
                 target.y = points.outside.y;
+                doors.state = "closed"
             }
         }
 
@@ -52,21 +55,19 @@ Item {
             path: Path {
                 PathLine { x: points.outside.x; y: points.outside.y }
                 PathLine { x: points.inside.x; y: points.inside.y }
-                PathLine { x: points.pissuar.x; y: points.pissuar.y }
+                PathLine { x: points.inFrontOfDoors.x; y: points.inFrontOfDoors.y }
             }
         }
         PauseAnimation {
-            duration: 1000
+            duration: 2000
         }
         PathAnimation {
             target: scenarios.target
-            duration: 4000
+            duration: 3000
             easing.type: Easing.Linear
             path: Path {
-                PathLine { x: points.inFrontOfDoors.x; y: points.inFrontOfDoors.y }
-                PathLine { x: points.atToilet.x; y: points.atToilet.y }
-                PathLine { x: points.closeToToilet.x; y: points.closeToToilet.y }
-                PathLine { x: points.inPlaceOfDoor.x; y: points.inPlaceOfDoor.y }
+                PathLine { x: points.inside.x; y: points.inside.y }
+                PathLine { x: points.outside.x; y: points.outside.y }
             }
         }
     }
@@ -106,12 +107,12 @@ Item {
             }
         }
         ScriptAction { script: { doors.state = "closed"; } }
-        PauseAnimation { duration: 5000 }
+        PauseAnimation { duration: 6000 }
 
         ScriptAction { script: { doors.state = "opened"; } }
         PathAnimation {
             target: scenarios.target
-            duration: 1000
+            duration: 1500
             easing.type: Easing.Linear
             orientationEntryDuration: 0
             path: Path {
@@ -126,6 +127,84 @@ Item {
             easing.type: Easing.Linear
             orientationEntryDuration: 0
             path: Path {
+                PathLine { x: points.inside.x; y: points.inside.y }
+                PathLine { x: points.atWashbasin.x; y: points.atWashbasin.y }
+            }
+        }
+        PauseAnimation { duration: 2000 }
+        PathAnimation {
+            target: scenarios.target
+            duration: 2000
+            easing.type: Easing.Linear
+            orientationEntryDuration: 0
+            path: Path {
+                PathLine { x: points.inside.x; y: points.inside.y }
+                PathLine { x: points.outside.x; y: points.outside.y }
+            }
+        }
+    }
+
+    SequentialAnimation {
+        id: test03
+        ScriptAction {
+            script: {
+                target.x = points.outside.x;
+                target.y = points.outside.y;
+                doors.state = "closed"
+            }
+        }
+        PauseAnimation { duration: 1000 }
+        PathAnimation {
+            target: scenarios.target
+            duration: 2000
+            easing.type: Easing.Linear
+            orientationEntryDuration: 0
+            path: Path {
+                PathLine { x: points.outside.x; y: points.outside.y }
+                PathLine { x: points.inside.x; y: points.inside.y }
+                PathLine { x: points.pissuar.x; y: points.pissuar.y }
+            }
+        }
+        PauseAnimation { duration: 3000 }
+        PathAnimation {
+            target: scenarios.target
+            duration: 2000
+            easing.type: Easing.Linear
+            orientationEntryDuration: 0
+            path: Path {
+                PathLine { x: points.atWashbasin.x; y: points.atWashbasin.y }
+            }
+        }
+        PauseAnimation { duration: 2000 }
+        PathAnimation {
+            target: scenarios.target
+            duration: 2000
+            easing.type: Easing.Linear
+            orientationEntryDuration: 0
+            path: Path {
+                PathLine { x: points.inside.x; y: points.inside.y }
+                PathLine { x: points.outside.x; y: points.outside.y }
+            }
+        }
+    }
+
+    SequentialAnimation {
+        id: test04
+        ScriptAction {
+            script: {
+                target.x = points.outside.x;
+                target.y = points.outside.y;
+                doors.state = "closed"
+            }
+        }
+        PauseAnimation { duration: 1000 }
+        PathAnimation {
+            target: scenarios.target
+            duration: 3000
+            easing.type: Easing.Linear
+            orientationEntryDuration: 0
+            path: Path {
+                PathLine { x: points.outside.x; y: points.outside.y }
                 PathLine { x: points.inside.x; y: points.inside.y }
                 PathLine { x: points.atWashbasin.x; y: points.atWashbasin.y }
             }

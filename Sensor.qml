@@ -90,5 +90,14 @@ Item {
         x: (direction === "left") ? -length : 0
         y: (direction === "up") ? -length : 0
     }
+
+    Rectangle {
+        color: "red"
+        width: 6
+        height: 6
+        radius: 3
+        x: (direction === "left") ? -length : 0
+        y: (direction === "up") ? -length : 0
+    }
 }
 

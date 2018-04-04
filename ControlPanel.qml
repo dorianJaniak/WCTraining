@@ -4,7 +4,7 @@ Rectangle {
     id: controlPanel
     color: startedAnimation ? "gray" : "lightgreen"
 
-    property int btnsCount: 6
+    property int btnsCount: 4
     readonly property int btnWidth: width / btnsCount
     property bool startedAnimation: false
 
