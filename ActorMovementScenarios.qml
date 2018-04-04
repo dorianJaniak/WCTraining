@@ -17,7 +17,7 @@ Item {
 
     Item {
         id: points
-        readonly property point pissuar: Qt.point(11 * scene.width / 12 - actor.width / 2,
+        readonly property point pissuar: Qt.point(16 * scene.width / 18 - actor.width / 2,
                                                   5 * scene.height / 6 - actor.height / 2);
         readonly property point atToilet: Qt.point(scene.width / 6 - actor.width / 2,
                                                    scene.height / 6  - actor.height / 2);
